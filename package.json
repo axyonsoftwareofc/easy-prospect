@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "export": "next build && next export"
+    "vercel-build": "next build && echo 'Build completed' && ls -la .next/"
   },
   "dependencies": {
     "next": "14.0.4",
