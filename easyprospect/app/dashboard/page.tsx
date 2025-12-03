@@ -1,9 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import { Search, Users, Handshake, TrendingUp, Filter, Plus, Mail, Phone, Check, X } from 'lucide-react';
+import { Search, Users, Handshake, TrendingUp, Filter, Plus, Mail, Phone, Check } from 'lucide-react';
 
-const DashboardPage = () => {
+export default function DashboardPage() {
   const [activeTab, setActiveTab] = useState<'empresas' | 'matches' | 'analytics'>('empresas');
 
   // Dados de exemplo
@@ -223,6 +223,4 @@ const DashboardPage = () => {
       )}
     </div>
   );
-};
-
-export default DashboardPage;
+}
