@@ -5,6 +5,9 @@ const nextConfig = {
   images: {
     domains: [],
   },
+  // ADICIONE ESTAS LINHAS:
+  trailingSlash: false,
+  output: 'standalone', // ou 'export' se quiser static
 }
 
 module.exports = nextConfig
