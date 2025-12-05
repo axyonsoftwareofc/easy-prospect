@@ -41,3 +41,32 @@ yarn-error.log*
 next-env.d.ts
 
 .vercel
+
+# Adicionar ao .gitignore (se não existir)
+@"
+
+# Checkpoints e documentos temporários
+CHECKPOINT_*.md
+SESSION_*.md
+
+# Scripts locais
+create-checkpoint.ps1
+cleanup.ps1
+git-commit.ps1
+
+# Backups
+*.backup
+*_backup/
+backup_*/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+"@ | Add-Content -Path ".gitignore" -Encoding UTF8
+
+Write-Host "✅ .gitignore atualizado para checkpoints" -ForegroundColor Green

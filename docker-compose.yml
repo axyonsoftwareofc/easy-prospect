@@ -1,24 +1,15 @@
-﻿version: '3.8'
-services:
+﻿services:
   postgres:
     image: postgres:15-alpine
     container_name: easyprospect-db
     environment:
-      POSTGRES_USER: easyprospect
-      POSTGRES_PASSWORD: senhasegura123
+      POSTGRES_PASSWORD: postgres123  # Só isso - usuário será 'postgres' por padrão
       POSTGRES_DB: easyprospect
     ports:
       - "5433:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     restart: unless-stopped
-    # ADICIONE ESTAS LINHAS:
-    command: ["postgres", "-c", "log_statement=all", "-c", "log_destination=stderr"]
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U easyprospect"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
 
 volumes:
   postgres_data:
