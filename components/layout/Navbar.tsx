@@ -1,3 +1,5 @@
+// components/layout/Navbar.tsx
+
 'use client';
 
 import { useState } from 'react';
@@ -10,6 +12,8 @@ const Navbar = () => {
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
 
   const navItems = [
+    { label: 'Construtor', href: '/construtor' },
+    { label: 'Explorar', href: '/explorar' },
     { label: 'Recursos', href: '#recursos' },
     { label: 'Como Funciona', href: '#como-funciona' },
     { label: 'Preços', href: '#precos' },

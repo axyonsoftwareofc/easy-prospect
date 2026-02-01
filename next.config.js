@@ -1,8 +1,17 @@
+// next.config.js
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  // Adicione para SQLite na Vercel
-  output: 'standalone',
+  images: {
+    unoptimized: true,
+  },
+  // Permitir uploads maiores
+  experimental: {
+    serverActions: {
+      bodySizeLimit: '10mb',
+    },
+  },
 }
 
 module.exports = nextConfig

@@ -1,5 +1,32 @@
+// lib/auth.ts
+
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+
+// Extender tipos do NextAuth
+declare module "next-auth" {
+  interface Session {
+    user: {
+      id: string;
+      email: string;
+      name?: string | null;
+      image?: string | null;
+    };
+  }
+
+  interface User {
+    id: string;
+    email: string;
+    name?: string | null;
+  }
+}
+
+declare module "next-auth/jwt" {
+  interface JWT {
+    id: string;
+    email: string;
+  }
+}
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -12,13 +39,23 @@ export const authOptions: NextAuthOptions = {
       async authorize(credentials) {
         console.log("🔐 Tentando login:", credentials?.email);
 
-        // Credenciais fixas para teste - SEM banco de dados
+        // Credenciais fixas para teste
         if (credentials?.email === "admin@easyprospect.com" && credentials?.password === "senha123") {
           console.log("✅ Login autorizado");
           return {
             id: "1",
             email: credentials.email,
             name: "Administrador"
+          };
+        }
+
+        // Credencial de teste
+        if (credentials?.email === "teste@teste.com" && credentials?.password === "senha123") {
+          console.log("✅ Login autorizado (teste)");
+          return {
+            id: "2",
+            email: credentials.email,
+            name: "Usuário Teste"
           };
         }
 
@@ -37,18 +74,18 @@ export const authOptions: NextAuthOptions = {
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
-        token.email = user.email;
+        token.email = user.email || "";
       }
       return token;
     },
     async session({ session, token }) {
       if (session.user) {
-        session.user.id = token.id as string;
-        session.user.email = token.email as string;
+        session.user.id = token.id;
+        session.user.email = token.email;
       }
       return session;
     }
   },
   secret: process.env.NEXTAUTH_SECRET,
-  debug: true,
+  debug: process.env.NODE_ENV === "development",
 };
